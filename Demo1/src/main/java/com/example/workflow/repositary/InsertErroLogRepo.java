@@ -1,14 +1,14 @@
 package com.example.workflow.repositary;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.workflow.entity.Metadata;
+import com.example.workflow.entity.ProcessLog;
 
 @Repository
-public interface FetchDataRepo extends JpaRepository<Metadata, Long> {
+public interface InsertErroLogRepo extends JpaRepository<ProcessLog, Long>{
+	
+	
 
-	List<Metadata> findAll();
+	
 }

@@ -15,12 +15,9 @@ public class ProcessLog {
 
 	private String status;
 
-	public ProcessLog(String id, String processName, String status) {
+	public ProcessLog() {
 		super();
-		Id = id;
-		this.processName = processName;
-		this.status = status;
-	}
+			}
 
 	public String getId() {
 		return Id;
