@@ -4,7 +4,7 @@
     <bpmn:startEvent id="Event_1c4slry" name="start">
       <bpmn:outgoing>Flow_0qullfu</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:serviceTask id="Activity_1d6rs38" name="Retrieve batch process metadata" camunda:class="com.example.workflow.delegates.FetchDataDelegate">
+    <bpmn:serviceTask id="Activity_1d6rs38" name="Retrieve batch process metadata" camunda:class="com.example.workflow.delegates.FetchMetaDataDelegate">
       <bpmn:incoming>Flow_14ejwwh</bpmn:incoming>
       <bpmn:outgoing>Flow_1uxi4s2</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -31,7 +31,9 @@
       <bpmn:outgoing>Flow_0meu1bk</bpmn:outgoing>
       <bpmn:outgoing>Flow_0248bp1</bpmn:outgoing>
     </bpmn:parallelGateway>
-    <bpmn:sequenceFlow id="Flow_11tmkg8" sourceRef="Gateway_1u8obcp" targetRef="Gateway_1oi317i" />
+    <bpmn:sequenceFlow id="Flow_11tmkg8" name="yes" sourceRef="Gateway_1u8obcp" targetRef="Gateway_1oi317i">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{found}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:callActivity id="Activity_13f3cpj" name="Get Store Master Data" calledElement="feedProcess" camunda:variableMappingClass="com.example.workflow.delegates.DelegatedVarMapping">
       <bpmn:extensionElements>
         <camunda:in businessKey="#{execution.processBusinessKey}" />
@@ -59,6 +61,7 @@
       <bpmn:incoming>Flow_0mymhws</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_0mymhws" sourceRef="Gateway_0xkk5ou" targetRef="Event_0nl6gag" />
+    <bpmn:parallelGateway id="Gateway_1laqih2" name="Launch Fetch process in parallel" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0urorhi">
@@ -93,6 +96,9 @@
       <bpmndi:BPMNEdge id="Flow_11tmkg8_di" bpmnElement="Flow_11tmkg8">
         <di:waypoint x="765" y="130" />
         <di:waypoint x="825" y="130" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="787" y="112" width="17" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0meu1bk_di" bpmnElement="Flow_0meu1bk">
         <di:waypoint x="850" y="105" />
@@ -162,6 +168,12 @@
         <dc:Bounds x="1162" y="112" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1171" y="155" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1laqih2_di" bpmnElement="Gateway_1laqih2">
+        <dc:Bounds x="1355" y="205" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1335" y="265" width="90" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
